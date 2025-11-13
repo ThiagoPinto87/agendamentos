@@ -1,0 +1,2 @@
+# O que é o Agendamento
+É um aplicativo de agendamento padrão que utiliza o google calendário para enviar aos clientes a confirmação de agendamento para que todos possam ficar preparados para as reuniões.
