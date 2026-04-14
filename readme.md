@@ -3,8 +3,10 @@
 
 
 ## Ações para desenvolver:
+
 1 - Capturar atualizações no google calendário à medida que o usuário atualiza (pode ser sempre ao final do dia)
 1.1 - Foi feito, porém, não está enviando a mensagem para cada cliente, o que está sendo feito é o resumo dos próximos 10 eventos para mim como um resumo.
+
 1.2 - Identificar quais clientes são e pegar o telefone deles e enviar mensagem para cada patrocinador.
 
 2 - Enviar toda a amanhã a agenda dos próximos dois dias confirmando a agenda com o cliente através do whatsapp

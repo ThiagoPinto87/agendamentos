@@ -5,6 +5,7 @@ from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
+import pywhatkit
 
 # Importa a função do seu outro ficheiro
 from aviso_whatsapp import enviar_mensagem
@@ -67,7 +68,7 @@ def listar_e_avisar():
         calendarId= os.getenv('ID_CALENDAR'), # Substitua pelo seu email do Google Calendar # type: ignore
         timeMin=time_min,
         timeMax=time_max, # Novo parâmetro: Limite máximo de data e hora!
-        maxResults=50,    # Aumentado para garantir que pega todos os eventos desses 3 dias
+        maxResults=3,    # Aumentado para garantir que pega todos os eventos desses 3 dias
         singleEvents=True,
         orderBy='startTime'
     ).execute()
@@ -86,10 +87,20 @@ def listar_e_avisar():
         start = event['start'].get('dateTime', event['start'].get('date'))
         titulo = event.get('summary', 'Sem título')
         
-        print(f"Evento encontrado: {titulo} | Início: {start}")
+        print(f"Compromisso: {titulo}\nInício: {start}")
         
+        start_datetime = datetime.datetime.fromisoformat(start.replace('Z', '+00:00'))
+        start_formatted = start_datetime.strftime('%d/%m/%Y')
+        
+        mensagem = f"""
+        Bom dia Tudo bem?
+        Gostaria de confirmar nossa agenda para o dia {start_formatted} à partir das {start_datetime.strftime('%H:%M')}h.
+        
+        Cliente: {titulo}"""
+
+
         # Chama a sua automação do WhatsApp
-        enviar_mensagem(titulo, start)
+        pywhatkit.sendwhatmsg_instantly("+5565996107333", mensagem)  # Substitua pelo número do WhatsApp
 
 if __name__ == '__main__':
     listar_e_avisar()

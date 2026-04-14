@@ -1,7 +1,6 @@
-# aviso_whatsapp.py
 
 def enviar_mensagem(evento_titulo, horario):
-    # Aqui você colocará a sua lógica de envio
+    # Me avisa do evento que será enviado para o WhatsApp.
     mensagem = f"Lembrete: Você tem o evento '{evento_titulo}' agendado para {horario}."
     
     print(f"--- Simulação de WhatsApp ---")

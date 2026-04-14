@@ -1,0 +1,25 @@
+Date: 14/4/2026
+Time: 16:7
+Phone Number: +1234567890
+Message: Bom dia Tudo bem? Gostaria de confirmar o compromisso que temos agendado para hoje, dia 14/04/2026 à partir das 08:30h'. Cliente: Procria
+--------------------
+Date: 14/4/2026
+Time: 16:7
+Phone Number: +1234567890
+Message: Bom dia Tudo bem? Gostaria de confirmar o compromisso que temos agendado para hoje, dia 14/04/2026 à partir das 11:20h'. Cliente: Feed de Porta+Externo+Interno+Instrução Diária
+--------------------
+Date: 14/4/2026
+Time: 16:8
+Phone Number: +5565996107333
+Message: Bom dia Tudo bem? Gostaria de confirmar nossa agenda para o dia 14/04/2026 à partir das 08:30h'. Cliente: Procria
+--------------------
+Date: 14/4/2026
+Time: 16:9
+Phone Number: +5565996107333
+Message: Bom dia Tudo bem? Gostaria de confirmar nossa agenda para o dia 14/04/2026 à partir das 11:20h'. Cliente: Feed de Porta+Externo+Interno+Instrução Diária
+--------------------
+Date: 14/4/2026
+Time: 16:9
+Phone Number: +5565996107333
+Message: Bom dia Tudo bem? Gostaria de confirmar nossa agenda para o dia 14/04/2026 à partir das 13:00h'. Cliente: Mirante - Gerente Fin (Gestão de Crises)
+--------------------
