@@ -1,3 +1,4 @@
+import sqlite3
 import os.path
 import os
 import datetime
@@ -13,6 +14,86 @@ from dotenv import load_dotenv
 
 # Carrega as variáveis de ambiente do arquivo .env
 load_dotenv()
+
+
+
+# ==========================================
+# 1. FUNÇÕES DE BANCO DE DADOS
+# ==========================================
+
+def cadastrar_cliente(nome_cliente, id_grupo):
+    """Conecta ao banco e insere um novo cliente na tabela Clientes."""
+    try:
+        # Abre a conexão com o banco que criamos
+        conexao = sqlite3.connect('banco_whatsapp.db')
+        cursor = conexao.cursor()
+        
+        # Comando SQL para inserir dados. 
+        # ATENÇÃO: Os pontos de interrogação (?) são espaços reservados.
+        sql_insert = "INSERT INTO Clientes (cliente, id_grupo_whatsapp) VALUES (?, ?)"
+        
+        # Executa o comando trocando os '?' pelas variáveis que recebemos
+        cursor.execute(sql_insert, (nome_cliente, id_grupo))
+        
+        # Salva as alterações no arquivo do banco de dados
+        conexao.commit()
+        print(f"\n✅ Sucesso! Cliente '{nome_cliente}' foi salvo no banco de dados.")
+        
+    except sqlite3.Error as erro:
+        # Se algo der errado, mostramos o erro sem quebrar o programa
+        print(f"\n❌ Erro ao tentar salvar no banco de dados: \n{erro}")
+        
+    finally:
+        # Garante que a conexão será fechada, dando erro ou não
+        if conexao:
+            conexao.close()
+
+
+# ==========================================
+# 2. INTERFACE COM O TERMINAL (MENU)
+# ==========================================
+
+def iniciar_sistema():
+    """Mostra um menu no terminal para o usuário interagir."""
+    print("🤖 Bem-vindo ao Sistema de Agendamentos do WhatsApp!")
+    
+    # O 'while True' cria um loop infinito para o menu não fechar sozinho
+    while True:
+        print("\n" + "="*30)
+        print("Menu de Opções:")
+        print("1 - Cadastrar novo Cliente")
+        print("9 - Enviar mensagens de aviso para os próximos compromissos")
+        print("0 - Sair do programa")
+        print("="*30)
+        
+        # Pega a resposta que o usuário digitar no terminal
+        opcao = input("👉 Escolha uma opção: ")
+        
+        if opcao == '1':
+            # Pede os dados do cliente
+            print("\n--- Novo Cadastro ---")
+            nome = input("Digite o nome do cliente: ")
+            grupo = input("Digite o ID do grupo do WhatsApp: ")
+            
+            # Chama a função que salva no banco de dados
+            cadastrar_cliente(nome, grupo)
+
+        elif opcao == '9':
+            print("\n🚀 Enviando mensagens de aviso para os próximos compromissos...")
+            listar_e_avisar()
+            
+        elif opcao == '0':
+            print("\n👋 Saindo do sistema. Até logo!")
+            break # Quebra o 'while True' e encerra o programa
+            
+        else:
+            print("\n⚠️ Opção inválida. Tente novamente digitando 1 ou 0.")
+
+
+
+# ============================================================
+# 3. FUNÇÃO PRINCIPAL PARA LISTAR AGENDAS E ENVIAR AVISOS
+# ============================================================
 
 
 # Escopos de acesso (Leitura e escrita na agenda)
@@ -68,7 +149,7 @@ def listar_e_avisar():
         calendarId= os.getenv('ID_CALENDAR'), # Substitua pelo seu email do Google Calendar # type: ignore
         timeMin=time_min,
         timeMax=time_max, # Novo parâmetro: Limite máximo de data e hora!
-        maxResults=3,    # Aumentado para garantir que pega todos os eventos desses 3 dias
+        maxResults=20,    # Aumentado para garantir que pega todos os eventos desses 3 dias
         singleEvents=True,
         orderBy='startTime'
     ).execute()
@@ -99,8 +180,11 @@ def listar_e_avisar():
         Cliente: {titulo}"""
 
 
-        # Chama a sua automação do WhatsApp
-        pywhatkit.sendwhatmsg_instantly("+5565996107333", mensagem)  # Substitua pelo número do WhatsApp
+        # Chama a sua automação do WhatsApp com a mensagem, fechando a aba do navegador após 2 segundos
+        # pywhatkit.sendwhatmsg_instantly("+5565996107333", mensagem, tab_close=True, close_time=2)  # Substitua pelo número do WhatsApp
+        pywhatkit.sendwhatmsg_to_group_instantly("false_120363424733276564@g.us_3078658027create1776397806_269341794770973@lid", "Oi delicia", tab_close=True, close_time=2)  # Substitua pelo ID do grupo do WhatsApp
+
 
 if __name__ == '__main__':
+    # iniciar_sistema()
     listar_e_avisar()

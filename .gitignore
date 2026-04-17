@@ -71,6 +71,9 @@ credentials.json
 token.json
 aws-credentials.json
 
+# banco de dados
+banco_whatsapp.db
+
 
 
 ### --- LOGS E TEMPORÁRIOS ---
