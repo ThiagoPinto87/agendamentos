@@ -177,14 +177,16 @@ def listar_e_avisar():
         Bom dia Tudo bem?
         Gostaria de confirmar nossa agenda para o dia {start_formatted} à partir das {start_datetime.strftime('%H:%M')}h.
         
-        Cliente: {titulo}"""
+        """
+        mensagem_cliente = f"{titulo} abaixo."
 
 
         # Chama a sua automação do WhatsApp com a mensagem, fechando a aba do navegador após 2 segundos
-        # pywhatkit.sendwhatmsg_instantly("+5565996107333", mensagem, tab_close=True, close_time=2)  # Substitua pelo número do WhatsApp
-        pywhatkit.sendwhatmsg_to_group_instantly("false_120363424733276564@g.us_3078658027create1776397806_269341794770973@lid", "Oi delicia", tab_close=True, close_time=2)  # Substitua pelo ID do grupo do WhatsApp
+        pywhatkit.sendwhatmsg_instantly("+5565996107333", mensagem_cliente, tab_close=True, close_time=4)
+        pywhatkit.sendwhatmsg_instantly("+5565996107333", mensagem, tab_close=True, close_time=4)  # Substitua meu número pelo número do WhatsApp do cliente.
+        # pywhatkit.sendwhatmsg_to_group_instantly("false_120363424733276564@g.us_3078658027create1776397806_269341794770973@lid", "Oi delicia", tab_close=True, close_time=2)  # Substitua pelo ID do grupo do WhatsApp
 
 
 if __name__ == '__main__':
-    # iniciar_sistema()
+    iniciar_sistema()
     listar_e_avisar()
